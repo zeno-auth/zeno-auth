@@ -16,5 +16,10 @@
             <factory service="doctrine.orm.default_entity_manager" method="getRepository"/>
             <argument>ZenoAuth\Module\User\Infrastructure\Doctrine\Entity\User</argument>
         </service>
+
+        <service id="ZenoAuth\Module\User\Domain\Repository\RoleRepositoryInterface" class="Doctrine\ORM\EntityManager">
+            <factory service="doctrine.orm.default_entity_manager" method="getRepository"/>
+            <argument>ZenoAuth\Module\User\Infrastructure\Doctrine\Entity\Role</argument>
+        </service>
     </services>
 </container>

@@ -18,6 +18,7 @@ use Borobudur\Component\Value\User\Email;
 use Borobudur\Component\Value\User\Password\Password;
 use Borobudur\Component\Value\User\Username;
 use DateTimeInterface;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @author  Iqbal Maulana <iq.bluejack@gmail.com>
@@ -45,7 +46,7 @@ trait UserTrait
     protected $lastLoginAt;
 
     /**
-     * @var CollectionInterface
+     * @var ArrayCollection
      */
     protected $roles;
 
@@ -54,7 +55,7 @@ trait UserTrait
      */
     public function __construct()
     {
-        $this->roles = new Collection();
+        $this->roles = new ArrayCollection();
     }
 
     public function getUsername(): Username
@@ -97,13 +98,16 @@ trait UserTrait
         $this->lastLoginAt = $lastLoginAt;
     }
 
+    /**
+     * @return CollectionInterface|Role[]
+     */
     public function getRoles(): ?CollectionInterface
     {
-        return $this->roles;
+        return new Collection($this->roles->toArray());
     }
 
     public function setRoles(CollectionInterface $roles): void
     {
-        $this->roles = $roles;
+        $this->roles = new ArrayCollection($roles->toArray());
     }
 }

@@ -26,6 +26,11 @@ class HomeController extends Controller
      */
     public function indexAction()
     {
-        return new Response('Welcome ' . $this->getUser()->getUsername());
+        return new Response(
+            'Welcome ' .
+            $this->getUser()->getUsername() .
+            ', Your roles is: ' .
+            implode(', ', $this->getUser()->getRoles())
+        );
     }
 }
