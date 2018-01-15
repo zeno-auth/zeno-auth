@@ -12,6 +12,7 @@ declare(strict_types=1);
 
 namespace ZenoAuth\Module\User\Infrastructure\Doctrine\Entity;
 
+use Borobudur\Component\Ddd\CollectionInterface;
 use Borobudur\Component\Value\User\Email;
 use Borobudur\Component\Value\User\Password\Password;
 use Borobudur\Component\Value\User\Username;
@@ -34,9 +35,21 @@ class User extends Model implements Entity\User
      * @ORM\Id()
      * @ORM\Column(type="uuid")
      *
-     * @var Model
+     * @var Entity\UserId
      */
     protected $id;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="ZenoAuth\Module\User\Infrastructure\Doctrine\Entity\Role")
+     * @ORM\JoinTable(
+     *     name="user_role",
+     *     joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="CASCADE")},
+     *     inverseJoinColumns={@ORM\JoinColumn(name="role_id", referencedColumnName="id")}
+     * )
+     *
+     * @var CollectionInterface|Entity\Role[]
+     */
+    protected $roles;
 
     /**
      * @ORM\Column(type="username", unique=true)

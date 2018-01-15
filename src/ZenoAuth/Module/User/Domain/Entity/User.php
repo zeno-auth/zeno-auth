@@ -40,6 +40,9 @@ interface User extends Model
 
     public function setLastLoginAt(DateTimeInterface $lastLoginAt): void;
 
+    /**
+     * @return CollectionInterface|Role[]|null
+     */
     public function getRoles(): ?CollectionInterface;
 
     public function setRoles(CollectionInterface $roles): void;

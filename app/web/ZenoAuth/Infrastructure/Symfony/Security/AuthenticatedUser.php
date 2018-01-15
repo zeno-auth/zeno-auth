@@ -15,6 +15,7 @@ namespace ZenoAuth\Web\Infrastructure\Symfony\Security;
 use JsonSerializable;
 use Symfony\Component\Security\Core\User\EquatableInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use ZenoAuth\Module\User\Domain\Entity\Role;
 use ZenoAuth\Module\User\Domain\Entity\User;
 
 /**
@@ -48,10 +49,14 @@ final class AuthenticatedUser implements UserInterface, JsonSerializable, Equata
     public function getRoles()
     {
         if (null !== $roles = $this->user->getRoles()) {
-            return (array) $roles;
+            $roles = $roles->map(
+                function (Role $role) {
+                    return 'ROLE_' . str_replace(' ', '_', strtoupper($role->getName()));
+                }
+            );
         }
 
-        return ['ROLE_USER'];
+        return array_merge(['ROLE_USER'], $roles->toArray());
     }
 
     /**

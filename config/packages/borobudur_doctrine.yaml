@@ -15,4 +15,4 @@ doctrine:
         auto_mapping: false
 
 borobudur_doctrine:
-    table_prefix: zeno_
+    table_prefix: zeno_auth_

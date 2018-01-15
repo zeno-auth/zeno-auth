@@ -67,12 +67,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/borobudur-php/borobudur.git",
-                "reference": "70213ea2ad9caf493b754c45de70b4ab9b57f9ce"
+                "reference": "13086b389123ffceebe8d08b9f9582546a88dfa1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/borobudur-php/borobudur/zipball/70213ea2ad9caf493b754c45de70b4ab9b57f9ce",
-                "reference": "70213ea2ad9caf493b754c45de70b4ab9b57f9ce",
+                "url": "https://api.github.com/repos/borobudur-php/borobudur/zipball/13086b389123ffceebe8d08b9f9582546a88dfa1",
+                "reference": "13086b389123ffceebe8d08b9f9582546a88dfa1",
                 "shasum": ""
             },
             "require": {
@@ -119,7 +119,7 @@
                 }
             ],
             "description": "Modern PHP Architecture",
-            "time": "2018-01-11T09:51:31+00:00"
+            "time": "2018-01-15T11:43:09+00:00"
         },
         {
             "name": "borobudur/doctrine-infra",
