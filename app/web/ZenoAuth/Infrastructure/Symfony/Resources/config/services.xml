@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  ~ This file is part of the Borobudur package.
+  ~
+  ~ (c) 2017 Borobudur <http://borobudur.io>
+  ~
+  ~ For the full copyright and license information, please view the LICENSE
+  ~ file that was distributed with this source code.
+  -->
+
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <defaults autowire="true" autoconfigure="true" public="false" />
+
+        <prototype namespace="ZenoAuth\Web\Infrastructure\Symfony\Http\Controller\" resource="../../Http/Controller" public="true" />
+
+        <service id="zeno_auth_web.security.encoder.password" class="ZenoAuth\Web\Infrastructure\Symfony\Security\Encoder\PasswordEncoder" public="false"/>
+
+        <service id="zeno_auth_web.symfony.security.user_provider" class="ZenoAuth\Web\Infrastructure\Symfony\Security\UserProvider" />
+
+        <service id="zeno_auth_web.symfony.security.handler.authentication_success_handler" class="ZenoAuth\Web\Infrastructure\Symfony\Security\Handler\AuthenticationSuccessHandler" />
+        <service id="zeno_auth_web.symfony.security.handler.authentication_failure_handler" class="ZenoAuth\Web\Infrastructure\Symfony\Security\Handler\AuthenticationFailureHandler" />
+
+    </services>
+</container>

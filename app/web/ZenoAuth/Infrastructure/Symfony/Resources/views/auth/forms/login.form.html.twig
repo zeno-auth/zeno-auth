@@ -1,0 +1,51 @@
+<form method="post" action="{{ path('zeno_auth_check_login') }}" ref="login-form" novalidate @submit.prevent="signin">
+    <input type="hidden" ref="csrf" value="{{ csrf_token('authenticate') }}" />
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label for="username">Username or email address</label>
+                <input type="text"
+                       v-model.trim="user.username"
+                       v-validate="'required'"
+                       class="form-control"
+                       name="username"
+                       id="username"
+                       :class="{'is-invalid': errors.has('username')}"
+                />
+
+                <small v-cloak class="form-text text-danger d-block" v-if="errors.has('username')">
+                    {% verbatim %}
+                        {{ errors.first('username') }}
+                    {% endverbatim %}
+                </small>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label for="password" class="d-block">
+                    Password
+                    <a tabindex="-1" class="float-right" href="">Forgot password?</a>
+                </label>
+                <input type="password"
+                       v-model.trim="user.password"
+                       v-validate="'required'"
+                       class="form-control"
+                       name="password"
+                       id="password"
+                       :class="{'is-invalid': errors.has('password')}"
+                />
+
+                <small v-cloak class="form-text text-danger d-block" v-if="errors.has('password')">
+                    {% verbatim %}
+                        {{ errors.first('password') }}
+                    {% endverbatim %}
+                </small>
+            </div>
+        </div>
+    </div>
+
+    <input type="submit" style="display: none;"/>
+</form>

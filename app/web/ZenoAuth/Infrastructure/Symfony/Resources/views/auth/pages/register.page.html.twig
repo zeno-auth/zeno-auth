@@ -1,0 +1,49 @@
+{% extends 'auth.layout.html.twig' %}
+
+{% block body %}
+    <div id="register" class="container">
+        <div class="row justify-content-md-center">
+            <div class="col-lg-6">
+                <div class="text-center mt-5">
+                    <a href="">
+                        <img height="52" src="{{ asset('assets/images/logo-dark.png') }}" alt="logo" title="logo" />
+                    </a>
+                    <h4 class="card-title font-weight-light mt-3">Create your personal account</h4>
+                </div>
+                <div class="card mt-3">
+                    <div class="card-body">
+                        <div v-cloak v-if="error" class="alert alert-danger">
+                            {% verbatim %}
+                                {{ error }}
+                            {% endverbatim %}
+                        </div>
+                        {% include '@ZenoAuthWeb/auth/forms/register.form.html.twig' %}
+                    </div>
+                    <div class="card-footer text-muted">
+                        <small class="text-muted">
+                            By clicking on "Create an account" below, you are agreeing to the Terms of Service and the Privacy Policy.
+                        </small>
+                        <hr />
+                        <div class="row">
+                            <div class="col-md-4">
+                                <button class="btn btn-success btn-block-sm" v-on:click="register" :disabled="true === registering">
+                                    <ballfall-spinner v-cloak v-if="registering"></ballfall-spinner>
+                                    <template v-else>Create an account</template>
+                                </button>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="text-center text-md-right mt-2 mt-md-1">
+                                    Already has an account? <a href="{{ path('zeno_auth_login') }}">Sign Here</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block app_scripts %}
+    <script type="text/javascript" src="{{ asset('build/register.js') }}"></script>
+{% endblock %}

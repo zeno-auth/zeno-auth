@@ -1,0 +1,41 @@
+{% extends 'auth.layout.html.twig' %}
+
+{% block body %}
+    <div id="login" class="container">
+        <div class="row justify-content-md-center">
+            <div class="col-lg-4">
+                <div class="text-center mt-5">
+                    <a href="">
+                        <img height="52" src="{{ asset('assets/images/logo-dark.png') }}" alt="logo" title="logo" />
+                    </a>
+                    <h3 class="font-weight-light mt-3">Sign in to Zeno Auth</h3>
+                </div>
+                <div class="card mt-3">
+                    <div class="card-body">
+                        <div v-cloak v-if="error" class="alert alert-danger">
+                            {% verbatim %}
+                                {{ error }}
+                            {% endverbatim %}
+                        </div>
+
+                        {% include '@ZenoAuthWeb/auth/forms/login.form.html.twig' %}
+
+                        <button class="btn btn-success btn-block text-center" v-on:click="signin" :disabled="true === signing">
+                            <div v-cloak class="d-inline-block ml-auto" v-if="signing">
+                                <ballfall-spinner></ballfall-spinner>
+                            </div>
+                            <template v-else>Sign In</template>
+                        </button>
+                    </div>
+                    <div class="card-footer text-muted text-center">
+                        New to Zeno? <a href="{{ path('zeno_auth_register') }}">Create an account</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block app_scripts %}
+    <script type="text/javascript" src="{{ asset('build/login.js') }}"></script>
+{% endblock %}

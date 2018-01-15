@@ -1,0 +1,5 @@
+zeno_auth_user.create:
+    classes:
+        message: ZenoAuth\Module\User\Domain\Contract\Command\CreateUser
+        handler: ZenoAuth\Module\User\Application\Command\Create\CreateUserHandler
+

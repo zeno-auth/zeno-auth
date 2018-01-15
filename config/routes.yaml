@@ -1,0 +1,3 @@
+web:
+    resource: '@ZenoAuthWebBundle/Http/Controller/'
+    type: annotation

@@ -1,0 +1,3 @@
+zeno_auth:
+    settings:
+        enable_messaging: true

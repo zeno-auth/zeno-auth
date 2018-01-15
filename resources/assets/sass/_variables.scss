@@ -1,0 +1,57 @@
+/*!
+ * This file is part of the Zeno Auth package.
+ *
+ * (c) 2018 Borobudur <http://borobudur.io>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+// Colors
+$white: #fff !default;
+$gray-100: #f9f9f9 !default;
+$gray-200: #e9ecef !default;
+$gray-300: #dee2e6 !default;
+$gray-400: #ced4da !default;
+$gray-500: #adb5bd !default;
+$gray-600: #868e96 !default;
+$gray-700: #495057 !default;
+$gray-800: #343a40 !default;
+$gray-900: #212529 !default;
+$black: #000 !default;
+
+$blue: #007bff !default;
+$indigo: #6610f2 !default;
+$purple: #6f42c1 !default;
+$pink: #e83e8c !default;
+$red: #dc3545 !default;
+$orange: #fd7e14 !default;
+$yellow: #ffc107 !default;
+$green: #28a745 !default;
+$teal: #20c997 !default;
+$cyan: #17a2b8 !default;
+
+$primary: $blue !default;
+$secondary: $gray-600 !default;
+$success: $green !default;
+$info: $cyan !default;
+$warning: $yellow !default;
+$danger: $red !default;
+$light: $white !default;
+$dark: $gray-800 !default;
+
+// Options
+$enable-transitions: true;
+$enable-rounded: true;
+$enable-shadows: true;
+
+// Typography
+$font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+$small-font-size: 80% !default;
+$font-size-base: 0.875rem;
+
+// Buttons + Forms
+$input-btn-padding-y: .275rem !default;
+
+// Body
+$body-bg: $gray-100;

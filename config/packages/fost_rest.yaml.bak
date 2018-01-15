@@ -1,0 +1,18 @@
+fos_rest:
+    versioning:
+        enabled: true
+
+    body_listener:
+        array_normalizer: fos_rest.normalizer.camel_keys
+
+    view:
+        formats:
+            json: true
+            xml: true
+
+    service:
+        view_handler: borobudur_api.view.view_handler
+
+    format_listener:
+        rules:
+            - { path: "^/", priorities: ["json", "xml"], fallback_format: json, prefer_extension: false }

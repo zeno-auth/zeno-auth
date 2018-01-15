@@ -1,0 +1,92 @@
+<form method="post" action="{{ path('zeno_auth_submit_register') }}" data-next="{{ path('zeno_auth_login') }}" ref="register-form" novalidate @submit.prevent="register">
+    <input type="hidden" ref="csrf" value="{{ csrf_token('register') }}" />
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label for="name">Full name</label>
+                <input type="text"
+                       v-model.trim="user.name"
+                       v-validate="'required'"
+                       class="form-control"
+                       name="name"
+                       id="name"
+                       :class="{'is-invalid': errors.has('name')}"
+                />
+
+                <small v-cloak class="form-text text-danger d-block" v-if="errors.has('name')">
+                    {% verbatim %}
+                        {{ errors.first('name') }}
+                    {% endverbatim %}
+                </small>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text"
+                       v-model.trim="user.username"
+                       v-validate="'required'"
+                       class="form-control"
+                       id="username"
+                       name="username"
+                       aria-describedby="username-help"
+                       :class="{'is-invalid': errors.has('username')}"
+                />
+                <small v-cloak class="form-text text-danger d-block" v-if="errors.has('username')">
+                    {% verbatim %}
+                        {{ errors.first('username') }}
+                    {% endverbatim %}
+                </small>
+                <small v-else id="username-help" class="form-text text-muted d-block">This will be your username. You will not able change your username.</small>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label for="email">Email address</label>
+                <input type="email"
+                       v-model.trim="user.email"
+                       v-validate="'required|email'"
+                       class="form-control"
+                       id="email"
+                       name="email"
+                       aria-describedby="email-help"
+                       :class="{'is-invalid': errors.has('email')}"
+                />
+                <small v-cloak class="form-text text-danger d-block" v-if="errors.has('email')">
+                    {% verbatim %}
+                        {{ errors.first('email') }}
+                    {% endverbatim %}
+                </small>
+                <small v-else id="email-help" class="form-text text-muted d-block">We'll occasionally send updates about your account to this inbox. We'll never share your email address with anyone.</small>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password"
+                       v-model="user.password"
+                       v-validate="'required'"
+                       class="form-control"
+                       id="password"
+                       name="password"
+                       aria-describedby="password-help"
+                       :class="{'is-invalid': errors.has('password')}"
+                />
+                <small v-cloak class="form-text text-danger d-block" v-if="errors.has('password')">
+                    {% verbatim %}
+                        {{ errors.first('password') }}
+                    {% endverbatim %}
+                </small>
+                <small v-else id="password-help" class="form-text text-muted d-block">Use at least one lowercase letter, one numeral, and seven characters.</small>
+            </div>
+        </div>
+    </div>
+    <input type="submit" value="" style="display: none" />
+</form>

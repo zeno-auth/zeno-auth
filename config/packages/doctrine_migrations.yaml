@@ -1,0 +1,5 @@
+doctrine_migrations:
+    dir_name: '%kernel.project_dir%/src/ZenoAuth/Infrastructure/Doctrine/Migration'
+    namespace: ZenoAuth\Infrastructure\Doctrine\Migration
+    table_name: zeno_auth_migrations
+    name: Zeno Auth Migrations

@@ -1,0 +1,37 @@
+security:
+    # https://symfony.com/doc/current/book/security.html#where-do-users-come-from-user-providers
+    providers:
+        zeno_auth:
+            id: zeno_auth_web.symfony.security.user_provider
+
+    encoders:
+        ZenoAuth\Web\Infrastructure\Symfony\Security\AuthenticatedUser:
+            id: zeno_auth_web.security.encoder.password
+
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+        main:
+            pattern: ^/
+            anonymous: true
+
+            form_login:
+                require_previous_session: true
+                login_path: /auth/login
+                check_path: /auth/login
+                csrf_token_generator: security.csrf.token_manager
+                username_parameter: username
+                password_parameter: password
+                success_handler: zeno_auth_web.symfony.security.handler.authentication_success_handler
+                failure_handler: zeno_auth_web.symfony.security.handler.authentication_failure_handler
+
+            logout:
+                path:   /auth/logout
+                target: /auth/login
+
+    access_control:
+        - { path: "^/auth/login",       roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: "^/auth/register",    roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: "^/",                 roles: IS_AUTHENTICATED_FULLY }

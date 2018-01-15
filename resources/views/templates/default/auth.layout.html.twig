@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Zeno Auth{% endblock %}</title>
+
+    {% include 'favicon.html.twig' %}
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="{{ asset('build/vendors.css') }}" />
+    <link rel="stylesheet" href="{{ asset('build/web.css') }}" />
+</head>
+<body>
+
+    <div id="content">
+        {% block body %}{% endblock %}
+    </div>
+
+    <script type="text/javascript" src="{{ asset('build/manifest.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('build/vendors.js') }}"></script>
+    {% block app_scripts %}{% endblock %}
+</body>
+</html>
