@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  ~ This file is part of the Zeno Auth package.
+  ~
+  ~ (c) 2018 Borobudur <http://borobudur.io>
+  ~
+  ~ For the full copyright and license information, please view the LICENSE
+  ~ file that was distributed with this source code.
+  -->
+
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <parameters>
+        <parameter key="zeno_oauth.jwt_private_key">%kernel.project_dir%/var/jwt/private.key</parameter>
+        <parameter key="zeno_oauth.jwt_public_key">%kernel.project_dir%//var/jwt/public.key</parameter>
+        <parameter key="zeno_oauth.jwt_pass_phrase"/>
+        <parameter key="zeno_oauth.jwt_issuer">null</parameter>
+        <parameter key="zeno_oauth.auth_code_secret">null</parameter>
+    </parameters>
+
+    <services>
+        <defaults autowire="true" public="false" autoconfigure="true"/>
+
+        <service class="Lcobucci\JWT\Signer\Rsa\Sha512" id="Lcobucci\JWT\Signer\Rsa"/>
+
+        <service class="ZenoAuth\Module\OAuth\Component\Hash\JwtTokenHasher" id="ZenoAuth\Module\OAuth\Component\Hash\TokenHasherInterface">
+            <argument>%zeno_oauth.jwt_private_key%</argument>
+            <argument>%zeno_oauth.jwt_public_key%</argument>
+            <argument id="Lcobucci\JWT\Signer\Rsa" type="service"/>
+            <argument>%zeno_oauth.jwt_pass_phrase%</argument>
+            <argument>%zeno_oauth.jwt_issuer%</argument>
+        </service>
+
+        <service class="ZenoAuth\Module\OAuth\Component\Authorization\Hash\CodeHasher" id="ZenoAuth\Module\OAuth\Component\Authorization\Hash\CodeHasherInterface">
+            <argument>%zeno_oauth.auth_code_secret%</argument>
+        </service>
+    </services>
+</container>

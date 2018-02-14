@@ -13,13 +13,13 @@ declare(strict_types=1);
 namespace ZenoAuth\Infrastructure\Doctrine\Type;
 
 use Doctrine\DBAL\Platforms\AbstractPlatform;
-use Doctrine\DBAL\Types\ArrayType;
+use Doctrine\DBAL\Types\JsonType;
 use Psr\Container\ContainerInterface;
 
 /**
  * @author  Iqbal Maulana <iq.bluejack@gmail.com>
  */
-class JsonObjectType extends ArrayType
+class JsonObjectType extends JsonType
 {
     const TYPE_NAME = 'json_object';
 
@@ -28,7 +28,6 @@ class JsonObjectType extends ArrayType
      */
     public function convertToDatabaseValue($value, AbstractPlatform $platform): ?string
     {
-
         if (is_object($value)) {
             $value = [
                 'type' => get_class($value),

@@ -1,3 +1,8 @@
+parameters:
+    zeno_oauth.jwt_pass_phrase: '%env(ZENO_OAUTH_JWT_PASS_PHRASE)%'
+    zeno_oauth.jwt_issuer: '%env(ZENO_OAUTH_JWT_ISSUER)%'
+    zeno_oauth.auth_code_secret: '%env(ZENO_AUTH_CODE_SECRET)%'
+
 zeno_auth:
     settings:
         enable_messaging: true

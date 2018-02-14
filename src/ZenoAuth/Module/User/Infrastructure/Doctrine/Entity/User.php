@@ -53,24 +53,35 @@ class User extends Model implements Entity\User
 
     /**
      * @ORM\Column(type="username", unique=true)
+     *
      * @var Username
      */
     protected $username;
 
     /**
      * @ORM\Column(type="json_object", nullable=true)
+     *
      * @var Password
      */
     protected $password;
 
     /**
      * @ORM\Column(type="email", unique=true)
+     *
      * @var Email
      */
     protected $email;
 
     /**
+     * @ORM\Column(type="string", length=200)
+     *
+     * @var string
+     */
+    protected $name;
+
+    /**
      * @ORM\Column(type="datetime", nullable=true)
+     *
      * @var DateTimeInterface
      */
     protected $lastLoginAt;

@@ -41,6 +41,11 @@ trait UserTrait
     protected $email;
 
     /**
+     * @var string
+     */
+    protected $name;
+
+    /**
      * @var DateTimeInterface
      */
     protected $lastLoginAt;
@@ -86,6 +91,16 @@ trait UserTrait
     public function setEmail(Email $email): void
     {
         $this->email = $email;
+    }
+
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): void
+    {
+        $this->name = $name;
     }
 
     public function getLastLoginAt(): DateTimeInterface

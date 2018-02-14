@@ -1,0 +1,67 @@
+{% extends 'auth.layout.html.twig' %}
+
+{% block body %}
+    <div id="authorize" class="container">
+        <div class="row justify-content-md-center vh-100 align-items-center">
+            <div class="col-lg-5">
+                <div class="text-center">
+                    <a href="{{ path('homepage') }}">
+                        <img height="52" src="{{ asset('assets/images/logo-dark.png') }}" alt="logo" title="logo" />
+                    </a>
+                </div>
+                <div class="card mt-3">
+                    <div class="card-header">
+                        <h2 class="text-center">Authorize App</h2>
+                        <div class="text-uppercase text-center text-muted">{{ client.name }}</div>
+                    </div>
+                    <div class="card-body">
+                        <div v-cloak v-if="error" class="alert alert-danger text-center">
+                            {% verbatim %}
+                                {{ error }}
+                            {% endverbatim %}
+                        </div>
+
+                        <div class="big-description text-muted text-center">
+                            Hi <span class="text-dark">{{ user.name }}</span>,<br />
+                            <span class="text-dark">{{ client.name }}</span> is requesting to access to your account
+                        </div>
+
+                        <ul class="permission-list mt-3">
+                            {% for scope in scopes %}
+                                <li>
+                                    <i class="icon {{ scope.id }}-permission"></i>
+                                    <span>
+                                        <span class="text-capitalize">{{ scope.label }}: </span>
+                                        <span class="text-muted">{{ scope.description }}</span>
+                                    </span>
+                                </li>
+                            {% endfor %}
+                        </ul>
+
+                        <form method="post" action="{{ path('zeno_oauth_authorize') }}" ref="authorize-form" novalidate>
+                            <input type="hidden" ref="csrf" value="{{ csrf_token('authorize') }}" />
+                        </form>
+                    </div>
+                    <div class="card-footer text-muted text-center">
+                        <button type="button" v-on:click="cancel('{{ cancel_redirect_uri }}')" class="btn btn-danger text-center btn-big btn-upper" :disabled="true === authorizing">
+                            <i class="fa fa-ban"></i>
+                            Cancel
+                        </button>
+
+                        <button type="button" class="btn btn-success text-center btn-big btn-upper" v-on:click="authorize" :disabled="true === authorizing">
+                            <ballfall-spinner v-cloak v-if="authorizing"></ballfall-spinner>
+                            <template v-else>
+                                <i class="fa fa-check-circle"></i>
+                                Authorize
+                            </template>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block app_scripts %}
+    <script type="text/javascript" src="{{ asset('build/authorize.js') }}"></script>
+{% endblock %}

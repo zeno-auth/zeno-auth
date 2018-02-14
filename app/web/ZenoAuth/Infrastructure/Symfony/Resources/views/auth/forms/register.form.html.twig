@@ -1,4 +1,4 @@
-<form method="post" action="{{ path('zeno_auth_submit_register') }}" data-next="{{ path('zeno_auth_login') }}" ref="register-form" novalidate @submit.prevent="register">
+<form method="post" action="{{ path('zeno_auth_submit_register') }}" data-next="{{ path('homepage') }}" ref="register-form" novalidate @submit.prevent="register">
     <input type="hidden" ref="csrf" value="{{ csrf_token('register') }}" />
     <div class="row">
         <div class="col-md-12">

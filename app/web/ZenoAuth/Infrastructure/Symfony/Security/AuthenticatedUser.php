@@ -107,6 +107,8 @@ final class AuthenticatedUser implements UserInterface, JsonSerializable, Equata
         return [
             'id'       => (string) $this->user->getId(),
             'username' => $this->getUsername(),
+            'email'    => (string) $this->user->getEmail(),
+            'name'     => $this->user->getName(),
             'roles'    => $this->getRoles(),
         ];
     }

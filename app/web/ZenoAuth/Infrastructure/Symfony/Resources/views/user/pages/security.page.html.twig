@@ -1,0 +1,51 @@
+{% extends 'layout.html.twig' %}
+
+{% block body %}
+    <div id="security" class="container pt-3">
+        <div class="card">
+            <div class="row">
+                <div class="col-md-3">
+                    {{ include('@ZenoAuthWeb/user/components/profile-sidebar.component.html.twig') }}
+                </div>
+                <div class="col-md-9 sidebar-card-content">
+                    <div class="card-body">
+                        <div class="head">
+                            <h2>Security Settings</h2>
+                            <p class="text-muted">Change your account security settings.</p>
+                        </div>
+
+                        <div class="mt-5">
+                            <div v-cloak v-if="error" class="alert alert-danger">
+                                {% verbatim %}
+                                    {{ error }}
+                                {% endverbatim %}
+                            </div>
+                            <div v-cloak v-if="success" class="alert alert-success">
+                                {% verbatim %}
+                                    {{ success }}
+                                {% endverbatim %}
+                            </div>
+                            {% include '@ZenoAuthWeb/user/forms/security.form.html.twig' with {user: user} %}
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                &nbsp;
+                            </div>
+                            <div class="col-md-8">
+                                <button class="btn btn-success btn-block-sm mt-3" v-on:click="changePassword" :disabled="true === changing">
+                                    <ballfall-spinner v-cloak v-if="changing"></ballfall-spinner>
+                                    <template v-else>Update Security</template>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block app_scripts %}
+    <script type="text/javascript" src="{{ asset('build/security.js') }}"></script>
+{% endblock %}

@@ -13,6 +13,10 @@ Encore
     // uncomment to define the assets of the project
     .addEntry('login', './app/web/ZenoAuth/Infrastructure/Symfony/Resources/assets/js/login.js')
     .addEntry('register', './app/web/ZenoAuth/Infrastructure/Symfony/Resources/assets/js/register.js')
+    .addEntry('authorize', './app/web/ZenoAuth/Infrastructure/Symfony/Resources/assets/js/authorize.js')
+    .addEntry('user-control', './app/web/ZenoAuth/Infrastructure/Symfony/Resources/assets/js/components/user-control.component.js')
+    .addEntry('profile', './app/web/ZenoAuth/Infrastructure/Symfony/Resources/assets/js/profile.js')
+    .addEntry('security', './app/web/ZenoAuth/Infrastructure/Symfony/Resources/assets/js/security.js')
     .addStyleEntry('web', './resources/assets/sass/web.scss')
 
     .createSharedEntry('vendors', [

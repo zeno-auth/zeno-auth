@@ -1,0 +1,2 @@
+oauth_api:
+    resource: "@ZenoOAuthApiBundle/Resources/config/app/routes.yaml"

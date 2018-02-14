@@ -24,6 +24,19 @@ class Kernel extends AbstractKernel
 {
     private const CONFIG_EXTS = '.{php,xml,yaml,yml}';
 
+    /**
+     * Constructor.
+     *
+     * @param string $environment
+     * @param bool   $debug
+     */
+    public function __construct($environment, $debug)
+    {
+        date_default_timezone_set('Asia/Jakarta');
+
+        parent::__construct($environment, $debug);
+    }
+
     public function getCacheDir(): string
     {
         return dirname(__DIR__) . '/var/cache/' . $this->environment;

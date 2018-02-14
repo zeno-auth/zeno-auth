@@ -10,4 +10,5 @@ return [
     ZenoAuth\Infrastructure\Symfony\Bundle\ZenoAuthDoctrineBundle\ZenoAuthDoctrineBundle::class => ['all' => true],
     ZenoAuth\Web\Infrastructure\Symfony\ZenoAuthWebBundle::class => ['all' => true],
     Symfony\Bundle\TwigBundle\TwigBundle::class => ['all' => true],
+    ZenoAuth\Api\Infrastructure\Symfony\ZenoAuthApiBundle::class => ['all' => true],
 ];

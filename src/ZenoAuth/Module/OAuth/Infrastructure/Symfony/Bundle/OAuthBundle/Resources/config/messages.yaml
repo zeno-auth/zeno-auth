@@ -1,0 +1,29 @@
+zeno_oauth_client.create:
+    classes:
+        message: ZenoAuth\Module\OAuth\Domain\Contract\Command\CreateClient
+        handler: ZenoAuth\Module\OAuth\Application\Command\Create\CreateClientHandler
+
+zeno_oauth_client.grant:
+    classes:
+        message: ZenoAuth\Module\OAuth\Domain\Contract\Command\GrantClient
+        handler: ZenoAuth\Module\OAuth\Application\Command\Grant\GrantClientHandler
+
+zeno_oauth_token.issue:
+    classes:
+        message: ZenoAuth\Module\OAuth\Domain\Contract\Command\IssueToken
+        handler: ZenoAuth\Module\OAuth\Application\Command\Issue\IssueTokenHandler
+
+zeno_oauth_client.find_by_id:
+    classes:
+        message: ZenoAuth\Module\OAuth\Domain\Contract\Query\FindClientById
+        handler: ZenoAuth\Module\OAuth\Application\Query\Find\FindClientByIdHandler
+
+zeno_oauth_scope.find_all_by_identifiers:
+    classes:
+        message: ZenoAuth\Module\OAuth\Domain\Contract\Query\FindAllScopesByIdentifiers
+        handler: ZenoAuth\Module\OAuth\Application\Query\Find\FindAllScopesByIdentifiersHandler
+
+zeno_oauth_granted_client.find_by_id:
+    classes:
+        message: ZenoAuth\Module\OAuth\Domain\Contract\Query\FindGrantedClient
+        handler: ZenoAuth\Module\OAuth\Application\Query\Find\FindGrantedClientHandler

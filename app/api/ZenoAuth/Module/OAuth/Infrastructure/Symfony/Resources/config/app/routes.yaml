@@ -1,0 +1,13 @@
+zeno_auth_token_issue:
+    resource: |
+        message: zeno_oauth_token.issue
+        methods: POST
+        path: tokens
+        serialization_version: $version
+    type: borobudur.message
+
+zeno_auth_users:
+    path: /users/me
+    methods: [GET]
+    controller: ZenoAuth\Api\Module\OAuth\Infrastructure\Symfony\Http\Controller\UserController::me
+
