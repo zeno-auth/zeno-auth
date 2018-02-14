@@ -10,15 +10,23 @@
 
 declare(strict_types=1);
 
-namespace ZenoAuth\Module\OAuth\Domain\Repository;
+namespace ZenoAuth\Module\OAuth\Domain\Contract\Command;
 
-use Borobudur\Component\Ddd\RepositoryInterface;
+use Borobudur\Component\Messaging\Message\Command;
 use ZenoAuth\Module\User\Domain\Entity\UserId;
 
 /**
  * @author  Iqbal Maulana <iq.bluejack@gmail.com>
  */
-interface TokenRepositoryInterface extends RepositoryInterface
+final class RevokeCredential extends Command
 {
-    public function removeByUser(UserId $user): void;
+    /**
+     * @var string
+     */
+    private $user;
+
+    public function getUser(): UserId
+    {
+        return new UserId($this->user);
+    }
 }

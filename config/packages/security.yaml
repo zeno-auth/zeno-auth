@@ -38,6 +38,7 @@ security:
             logout:
                 path:   /auth/logout
                 target: /auth/login
+                handlers: [zeno_auth_web.logout_handler]
 
     access_control:
         - { path: "^/api/v[0-9]+/tokens",   roles: IS_AUTHENTICATED_ANONYMOUSLY }

@@ -13,6 +13,11 @@ zeno_oauth_token.issue:
         message: ZenoAuth\Module\OAuth\Domain\Contract\Command\IssueToken
         handler: ZenoAuth\Module\OAuth\Application\Command\Issue\IssueTokenHandler
 
+zeno_oauth_token.revoke:
+    classes:
+        message: ZenoAuth\Module\OAuth\Domain\Contract\Command\RevokeCredential
+        handler: ZenoAuth\Module\OAuth\Application\Command\Revoke\RevokeCredentialHandler
+
 zeno_oauth_client.find_by_id:
     classes:
         message: ZenoAuth\Module\OAuth\Domain\Contract\Query\FindClientById

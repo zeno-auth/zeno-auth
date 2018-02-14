@@ -25,6 +25,7 @@
 
         <service id="ZenoAuth\Module\OAuth\Domain\Service\ClientCreatorInterface" class="ZenoAuth\Module\OAuth\Application\Command\Create\ClientCreator"/>
         <service id="ZenoAuth\Module\OAuth\Domain\Service\GrantedClientCreatorInterface" class="ZenoAuth\Module\OAuth\Application\Command\Create\GrantedClientCreator"/>
+        <service id="ZenoAuth\Module\OAuth\Domain\Service\CredentialRevokerInterface" class="ZenoAuth\Module\OAuth\Application\Command\Revoke\CredentialRevoker"/>
 
         <prototype namespace="ZenoAuth\Module\OAuth\Infrastructure\Symfony\Bundle\OAuthBundle\Console\" resource="../../Console/*" />
     </services>
