@@ -13,6 +13,14 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
 
+        api:
+            pattern: "^/api/v([0-9]+)/"
+            stateless: true
+            anonymous: true
+            guard:
+                authenticators:
+                    - zeno_auth_oauth_api.security.oauth_guard
+
         main:
             pattern: ^/
             anonymous: true
@@ -30,8 +38,10 @@ security:
             logout:
                 path:   /auth/logout
                 target: /auth/login
+                handlers: [zeno_auth_web.logout_handler]
 
     access_control:
-        - { path: "^/auth/login",       roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: "^/auth/register",    roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: "^/",                 roles: IS_AUTHENTICATED_FULLY }
+        - { path: "^/api/v[0-9]+/tokens",   roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: "^/auth/login",           roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: "^/auth/register",        roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: "^/",                     roles: IS_AUTHENTICATED_FULLY }

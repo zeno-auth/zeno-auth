@@ -1,0 +1,72 @@
+<form method="post" action="{{ path('zeno_auth_user_change_password', {user: user.id}) }}" ref="security-form" novalidate @submit.prevent="changePassword">
+    <input type="hidden" ref="csrf" value="{{ csrf_token('security') }}" />
+    <div class="row">
+        <div class="col-md-4">
+            <div class="control-label">
+                <label class="form-label form-label-title">Current Password</label>
+                <p class="text-muted">Please input your current password.</p>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <input id="current_password"
+                   name="current_password"
+                   type="password"
+                   class="form-control"
+                   v-model.trim="current_password"
+                   v-validate="'required'"
+                   :class="{'is-invalid': errors.has('current_password')}"
+            />
+            <small v-cloak class="form-text text-danger d-block" v-if="errors.has('current_password')">
+                {% verbatim %}
+                    {{ errors.first('current_password') }}
+                {% endverbatim %}
+            </small>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col-md-4">
+            <div class="control-label">
+                <label class="form-label form-label-title">New Password</label>
+                <p class="text-muted">Insert your new password and confirm.</p>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="name">Password</label>
+                    <input id="password"
+                           type="password"
+                           class="form-control"
+                           v-model.trim="password"
+                           v-validate="'required'"
+                           name="password"
+                           :class="{'is-invalid': errors.has('password')}"
+                    />
+                    <small v-cloak class="form-text text-danger d-block" v-if="errors.has('password')">
+                        {% verbatim %}
+                            {{ errors.first('password') }}
+                        {% endverbatim %}
+                    </small>
+                </div>
+                <div class="col-md-6">
+                    <label for="name">Password Confirmation</label>
+                    <input id="confirm_password"
+                           name="confirm_password"
+                           type="password"
+                           class="form-control"
+                           v-model.trim="confirm_password"
+                           v-validate="'required|confirmed:password'"
+                           :class="{'is-invalid': errors.has('confirm_password')}"
+                    />
+                    <small v-cloak class="form-text text-danger d-block" v-if="errors.has('confirm_password')">
+                        {% verbatim %}
+                            {{ errors.first('confirm_password') }}
+                        {% endverbatim %}
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+    <input type="submit" value="" style="display: none" />
+</form>

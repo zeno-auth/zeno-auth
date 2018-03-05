@@ -1,0 +1,14 @@
+<div id="user-control" class="dropdown" v-bind:class="{'dropdown-active': active}">
+    <a class="dropdown-toggle" v-on:click="active = !active">
+        <span class="avatar avatar-sm">
+            <img src="{{ asset('assets/images/profile-small.jpg') }}" />
+        </span>
+        <i class="fa fa-angle-down"></i>
+    </a>
+    <div class="dropdown-menu dropdown-menu-right" v-bind:class="{'show': active}">
+        <a href="{{ path('zeno_auth_logout') }}" class="dropdown-item text-danger">
+            <i class="icon fa fa-power-off"></i>
+            Sign out
+        </a>
+    </div>
+</div>

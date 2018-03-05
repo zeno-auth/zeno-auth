@@ -11,6 +11,8 @@
 
 @import "~bootstrap/scss/bootstrap";
 @import "button";
+@import "fa/fontawesome";
+@import "fa/fa-solid";
 
 label {
     font-weight: 600;
@@ -18,9 +20,196 @@ label {
 }
 
 .btn {
-    height: 32px;
+    min-height: 32px;
+
+    &.btn-big {
+        padding: 12px 18px;
+    }
+
+    &.btn-upper {
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+    }
 }
 
 [v-cloak] {
     display: none !important;
+}
+
+h1, h2 {
+    font-weight: 300;
+}
+
+.big-description {
+    line-height: 30px;
+    font-size: 22px;
+    font-weight: 300;
+    padding: 35px 20px;
+}
+
+ul.permission-list {
+    margin: 0 15px;
+    padding: 0;
+    display: block;
+    width: 100%;
+    list-style: none;
+    overflow: hidden;
+
+    > li {
+        margin-bottom: 20px;
+        font-size: 16px;
+        display: table;
+        line-height: 19px;
+
+        > .icon {
+            @include border-radius(3px);
+
+            background-clip: padding-box;
+            display: inline-block;
+            float: left;
+            margin-right: 14px;
+            background-color: #e0e1e2;
+            width: 38px;
+            height: 38px;
+            line-height: 38px;
+            vertical-align: middle;
+            text-align: center;
+            font-size: 28px;
+        }
+
+        > span {
+            display: table-cell;
+            vertical-align: middle;
+        }
+    }
+}
+
+.basic-permission {
+    @extend .fa;
+    @extend .fa-user-circle;
+}
+
+.email-permission {
+    @extend .fa;
+    @extend .fa-at;
+}
+
+.vh-100 {
+    height: 100vh;
+}
+
+.app-body {
+    margin-top: 57px;
+}
+
+#user-control {
+    display: inline-block;
+    > .dropdown-toggle {
+        &::after {
+            display: none;
+        }
+
+        > i {
+            color: $border-color;
+        }
+
+        &:hover {
+            > .avatar {
+                border-color: theme-color('primary');
+            }
+
+            > i {
+                color: theme-color('primary');
+            }
+
+            cursor: pointer;
+        }
+    }
+
+    &.dropdown-active {
+        > .dropdown-toggle {
+            > .avatar {
+                border-color: theme-color('primary');
+            }
+
+            > i {
+                color: theme-color('primary');
+            }
+        }
+    }
+
+    > .dropdown-menu {
+        min-width: 190px;
+        > .dropdown-item {
+            > .icon {
+                margin-right: 10px;
+            }
+        }
+    }
+}
+
+.avatar {
+    @include border-radius(50%);
+    position:         relative;
+    background-color: transparent;
+    display:          inline-block;
+    padding:          7px;
+    border:           3px solid $border-color;
+
+    & > img {
+        @include border-radius(50%);
+        background-color: #fff;
+        position:         relative;
+        width:            100%;
+        height:           100%;
+        z-index:          2;
+    }
+
+    &.avatar-sm {
+        width:      40px;
+        height:     40px;
+        padding:    2px;
+        border:     2px solid $border-color;
+    }
+}
+
+.sidebar-card-nav {
+    margin-top: 20px;
+    margin-bottom: 20px;
+
+    > .nav-link {
+        > .icon {
+            margin-right: 15px;
+        }
+
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+        padding-top: .7rem;
+        padding-bottom: .7rem;
+        color: $text-muted;
+        border-left: 1px solid transparent;
+        font-size: 15px;
+
+        &.active {
+            border-left-color: theme-color('primary');
+            color: theme-color('primary');
+
+            > .icon {
+                color: theme-color('primary');
+            }
+        }
+
+        &:hover {
+            color: theme-color('primary');
+
+            > .icon {
+                color: theme-color('primary');
+            }
+        }
+    }
+}
+
+.sidebar-card-content {
+    border-left: 1px solid $body-bg;
 }

@@ -16,6 +16,8 @@ use Doctrine\DBAL\Types\Type;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 use ZenoAuth\Infrastructure\Doctrine\Type\EmailType;
 use ZenoAuth\Infrastructure\Doctrine\Type\JsonObjectType;
+use ZenoAuth\Infrastructure\Doctrine\Type\UrisType;
+use ZenoAuth\Infrastructure\Doctrine\Type\UriType;
 use ZenoAuth\Infrastructure\Doctrine\Type\UsernameType;
 
 /**
@@ -27,6 +29,8 @@ final class ZenoAuthDoctrineBundle extends Bundle
         UsernameType::class,
         EmailType::class,
         JsonObjectType::class,
+        UrisType::class,
+        UriType::class,
     ];
 
     public function boot(): void

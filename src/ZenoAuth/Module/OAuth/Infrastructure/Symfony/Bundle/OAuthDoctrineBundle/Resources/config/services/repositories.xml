@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ This file is part of the zeno-auth package.
+  ~
+  ~ (c) 2018 Borobudur <http://borobudur.io>
+  ~
+  ~ For the full copyright and license information, please view the LICENSE
+  ~ file that was distributed with this source code.
+  -->
+
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <defaults autowire="true" public="false" autoconfigure="true"/>
+
+        <service id="ZenoAuth\Module\OAuth\Domain\Repository\ClientRepositoryInterface" class="Doctrine\ORM\EntityManager">
+            <factory service="doctrine.orm.default_entity_manager" method="getRepository"/>
+            <argument>ZenoAuth\Module\OAuth\Infrastructure\Doctrine\Entity\Client</argument>
+        </service>
+
+        <service id="ZenoAuth\Module\OAuth\Domain\Repository\AccessTokenRepositoryInterface" class="Doctrine\ORM\EntityManager">
+            <factory service="doctrine.orm.default_entity_manager" method="getRepository"/>
+            <argument>ZenoAuth\Module\OAuth\Infrastructure\Doctrine\Entity\AccessToken</argument>
+        </service>
+
+        <service id="ZenoAuth\Module\OAuth\Domain\Repository\RefreshTokenRepositoryInterface" class="Doctrine\ORM\EntityManager">
+            <factory service="doctrine.orm.default_entity_manager" method="getRepository"/>
+            <argument>ZenoAuth\Module\OAuth\Infrastructure\Doctrine\Entity\RefreshToken</argument>
+        </service>
+
+        <service id="ZenoAuth\Module\OAuth\Domain\Repository\AuthorizationCodeRepositoryInterface" class="Doctrine\ORM\EntityManager">
+            <factory service="doctrine.orm.default_entity_manager" method="getRepository"/>
+            <argument>ZenoAuth\Module\OAuth\Infrastructure\Doctrine\Entity\AuthorizationCode</argument>
+        </service>
+
+        <service id="ZenoAuth\Module\OAuth\Domain\Repository\GrantedClientRepositoryInterface" class="Doctrine\ORM\EntityManager">
+            <factory service="doctrine.orm.default_entity_manager" method="getRepository"/>
+            <argument>ZenoAuth\Module\OAuth\Infrastructure\Doctrine\Entity\GrantedClient</argument>
+        </service>
+    </services>
+</container>

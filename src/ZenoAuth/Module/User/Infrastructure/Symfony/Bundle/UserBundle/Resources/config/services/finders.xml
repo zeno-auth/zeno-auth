@@ -13,6 +13,8 @@
     <services>
         <defaults autowire="true" public="false" autoconfigure="true"/>
 
-        <prototype namespace="ZenoAuth\Module\User\Application\Query\" resource="../../../../../../Application/Query/*Finder" />
+        <prototype namespace="ZenoAuth\Module\User\Application\Query\" resource="../../../../../../Application/Query/*Finder.php" />
+
+        <service id="ZenoAuth\Module\User\Domain\Service\UserFinderInterface" alias="ZenoAuth\Module\User\Application\Query\UserFinder" />
     </services>
 </container>

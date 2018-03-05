@@ -37,6 +37,11 @@ final class CreateUser extends Command
     /**
      * @var string
      */
+    private $name;
+
+    /**
+     * @var string
+     */
     private $email;
 
     /**
@@ -51,6 +56,11 @@ final class CreateUser extends Command
         }
 
         return $this->id;
+    }
+
+    public function getName(): string
+    {
+        return $this->name;
     }
 
     public function getUsername(): Username

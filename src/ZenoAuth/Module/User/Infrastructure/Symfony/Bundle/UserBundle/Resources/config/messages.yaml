@@ -3,3 +3,12 @@ zeno_auth_user.create:
         message: ZenoAuth\Module\User\Domain\Contract\Command\CreateUser
         handler: ZenoAuth\Module\User\Application\Command\Create\CreateUserHandler
 
+zeno_auth_user.update:
+    classes:
+        message: ZenoAuth\Module\User\Domain\Contract\Command\UpdateUser
+        handler: ZenoAuth\Module\User\Application\Command\Update\UpdateUserHandler
+
+zeno_auth_user.change_password:
+    classes:
+        message: ZenoAuth\Module\User\Domain\Contract\Command\ChangeUserPassword
+        handler: ZenoAuth\Module\User\Application\Command\Update\ChangeUserPasswordHandler

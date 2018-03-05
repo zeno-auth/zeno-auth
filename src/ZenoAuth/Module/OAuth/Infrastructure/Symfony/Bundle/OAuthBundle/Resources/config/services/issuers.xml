@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  ~ This file is part of the Zeno Auth package.
+  ~
+  ~ (c) 2018 Borobudur <http://borobudur.io>
+  ~
+  ~ For the full copyright and license information, please view the LICENSE
+  ~ file that was distributed with this source code.
+  -->
+
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <parameters>
+        <parameter key="zeno_oauth.access_token_ttl">3600</parameter>
+        <parameter key="zeno_oauth.refresh_token_ttl">2419200</parameter>
+        <parameter key="zeno_oauth.auth_code_ttl">300</parameter>
+    </parameters>
+
+    <services>
+        <defaults autowire="true" public="false" autoconfigure="true"/>
+
+        <service id="ZenoAuth\Module\OAuth\Application\Command\Issue\AccessTokenIssuer">
+            <argument id="ZenoAuth\Module\OAuth\Application\Query\ClientFinder" type="service"/>
+            <argument id="ZenoAuth\Module\User\Domain\Service\UserFinderInterface" type="service"/>
+            <argument id="ZenoAuth\Module\OAuth\Domain\Repository\AccessTokenRepositoryInterface" type="service"/>
+            <argument id="ZenoAuth\Module\OAuth\Domain\Factory\AccessTokenFactoryInterface" type="service"/>
+            <argument>%zeno_oauth.access_token_ttl%</argument>
+        </service>
+
+        <service id="ZenoAuth\Module\OAuth\Application\Command\Issue\RefreshTokenIssuer">
+            <argument id="ZenoAuth\Module\OAuth\Application\Query\ClientFinder" type="service"/>
+            <argument id="ZenoAuth\Module\User\Domain\Service\UserFinderInterface" type="service"/>
+            <argument id="ZenoAuth\Module\OAuth\Domain\Repository\RefreshTokenRepositoryInterface" type="service"/>
+            <argument id="ZenoAuth\Module\OAuth\Domain\Factory\RefreshTokenFactoryInterface" type="service"/>
+            <argument id="ZenoAuth\Module\OAuth\Domain\Repository\AccessTokenRepositoryInterface" type="service"/>
+            <argument>%zeno_oauth.refresh_token_ttl%</argument>
+        </service>
+
+        <service class="ZenoAuth\Module\OAuth\Application\Command\Issue\TokenIssuerManager" id="zeno_auth.module.oauth.application.command.issue.token_issuer_manager">
+            <argument id="ZenoAuth\Module\OAuth\Component\Hash\TokenHasherInterface" type="service"/>
+            <argument type="collection">
+                <argument id="ZenoAuth\Module\OAuth\Application\Command\Issue\AccessTokenIssuer" type="service"/>
+                <argument id="ZenoAuth\Module\OAuth\Application\Command\Issue\RefreshTokenIssuer" type="service"/>
+            </argument>
+        </service>
+
+        <service class="ZenoAuth\Module\OAuth\Application\Command\Issue\AuthorizationCodeIssuer" id="zeno_auth.module.oauth.application.command.issue.authorization_code_issuer">
+            <argument id="ZenoAuth\Module\OAuth\Domain\Factory\AuthorizationCodeFactoryInterface" type="service"/>
+            <argument id="ZenoAuth\Module\OAuth\Domain\Repository\AuthorizationCodeRepositoryInterface" type="service"/>
+            <argument id="ZenoAuth\Module\OAuth\Application\Query\ClientFinder" type="service"/>
+            <argument id="ZenoAuth\Module\User\Application\Query\UserFinder" type="service"/>
+            <argument id="ZenoAuth\Module\OAuth\Component\Authorization\Hash\CodeHasherInterface" type="service"/>
+            <argument>%zeno_oauth.auth_code_ttl%</argument>
+        </service>
+    </services>
+</container>

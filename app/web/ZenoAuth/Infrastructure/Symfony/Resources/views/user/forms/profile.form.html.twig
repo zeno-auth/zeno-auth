@@ -1,0 +1,65 @@
+<form action="{{ path('zeno_auth_update_user', {user: user.id}) }}" method="post" ref="profile-form" novalidate @submit.prevent="update">
+    <input type="hidden" ref="csrf" value="{{ csrf_token('profile') }}" />
+    <div class="row">
+        <div class="col-md-4">
+            <div class="control-label">
+                <label class="form-label form-label-title">Account Identifier</label>
+                <p class="text-muted">Account identifier used to login to your account. The username can't be changed.</p>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="username">Username</label>
+                    <input id="username" value="{{ user.username }}" disabled class="form-control" />
+                </div>
+                <div class="col-md-6">
+                    <label for="email">Email Address</label>
+                    <input id="email"
+                           name="email"
+                           v-model.trim="user.email"
+                           v-validate="'required'"
+                           ref="email"
+                           data-value="{{ user.email }}"
+                           class="form-control"
+                           :class="{'is-invalid': errors.has('email')}"
+                    />
+                    <small v-cloak class="form-text text-danger d-block" v-if="errors.has('email')">
+                        {% verbatim %}
+                            {{ errors.first('email') }}
+                        {% endverbatim %}
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col-md-4">
+            <div class="control-label">
+                <label class="form-label form-label-title">Personal</label>
+                <p class="text-muted">Change your name, so somebody can easily find you.</p>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="row">
+                <div class="col-md-12">
+                    <label for="name">Full Name</label>
+                    <input id="name"
+                           ref="name"
+                           v-model.trim="user.name"
+                           v-validate="'required'"
+                           data-value="{{ user.name }}"
+                           class="form-control"
+                           :class="{'is-invalid': errors.has('name')}"
+                    />
+                    <small v-cloak class="form-text text-danger d-block" v-if="errors.has('name')">
+                        {% verbatim %}
+                            {{ errors.first('name') }}
+                        {% endverbatim %}
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

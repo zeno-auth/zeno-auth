@@ -1,3 +1,10 @@
-web:
-    resource: '@ZenoAuthWebBundle/Http/Controller/'
+zeno_auth_web:
+    resource: "@ZenoAuthWebBundle/Http/Controller/"
     type: annotation
+
+zeno_auth_api:
+    prefix: /api/v{version}
+    resource: "@ZenoAuthApiBundle/Resources/config/app/routes.yaml"
+    requirements:
+        version: '1'
+

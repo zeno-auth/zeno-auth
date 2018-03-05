@@ -22,5 +22,13 @@
         <service id="zeno_auth_web.symfony.security.handler.authentication_success_handler" class="ZenoAuth\Web\Infrastructure\Symfony\Security\Handler\AuthenticationSuccessHandler" />
         <service id="zeno_auth_web.symfony.security.handler.authentication_failure_handler" class="ZenoAuth\Web\Infrastructure\Symfony\Security\Handler\AuthenticationFailureHandler" />
 
+        <service id="ZenoAuth\Web\Infrastructure\Symfony\EventSubscriber\RedirectAuthenticatedUserSubscriber">
+            <argument id="security.token_storage" type="service"/>
+            <argument id="router" type="service"/>
+
+            <tag name="kernel.event_listener" event="kernel.request" method="onKernelRequest"/>
+        </service>
+
+        <service id="zeno_auth_web.logout_handler" class="ZenoAuth\Web\Infrastructure\Symfony\Handler\LogoutHandler"/>
     </services>
 </container>

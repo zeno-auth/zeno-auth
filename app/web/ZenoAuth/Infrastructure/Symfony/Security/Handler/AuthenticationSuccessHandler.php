@@ -14,25 +14,58 @@ namespace ZenoAuth\Web\Infrastructure\Symfony\Security\Handler;
 
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
-use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Http\Authentication\AuthenticationSuccessHandlerInterface;
+use Symfony\Component\Security\Http\Util\TargetPathTrait;
 
 /**
  * @author  Iqbal Maulana <iq.bluejack@gmail.com>
  */
 class AuthenticationSuccessHandler implements AuthenticationSuccessHandlerInterface
 {
+    use TargetPathTrait;
+
+    /**
+     * @var string
+     */
+    protected $providerKey;
+
     /**
      * {@inheritdoc}
      */
     public function onAuthenticationSuccess(Request $request, TokenInterface $token): JsonResponse
     {
-        /*if ($request->getSession() instanceof SessionInterface) {
-            $request->getSession()->set(Security::LAST_USERNAME, $token->getUsername());
-        }*/
+        $redirectUri = $this->getTargetPath($request->getSession(), $this->providerKey);
 
-        return new JsonResponse(['user' => $token->getUser()]);
+        if (null !== $redirectUri) {
+            $this->removeTargetPath($request->getSession(), $this->providerKey);
+        }
+
+        return new JsonResponse(
+            [
+                'user'         => $token->getUser(),
+                'redirect_uri' => $redirectUri,
+            ]
+        );
+    }
+
+    /**
+     * Get the provider key.
+     *
+     * @return string
+     */
+    public function getProviderKey()
+    {
+        return $this->providerKey;
+    }
+
+    /**
+     * Set the provider key.
+     *
+     * @param string $providerKey
+     */
+    public function setProviderKey($providerKey)
+    {
+        $this->providerKey = $providerKey;
     }
 }

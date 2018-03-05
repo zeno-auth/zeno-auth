@@ -1,0 +1,12 @@
+{% set currentPath = path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) %}
+
+<nav class="nav flex-column sidebar-card-nav">
+    <a class="nav-link {{ currentPath == path('homepage') ? 'active' : '' }}" href="{{ path('homepage') }}">
+        <i class="icon fa fa-user-circle"></i>
+        Account
+    </a>
+    <a class="nav-link {{ currentPath == path('zeno_auth_security_settings') ? 'active' : '' }}" href="{{ path('zeno_auth_security_settings') }}">
+        <i class="icon fa fa-shield-alt"></i>
+        Security
+    </a>
+</nav>

@@ -11,4 +11,5 @@
 return [
     Borobudur\Infrastructure\Symfony\Bundle\DoctrineBundle\BorobudurDoctrineBundle::class => ['all' => true],
     ZenoAuth\Module\User\Infrastructure\Symfony\Bundle\UserDoctrineBundle\ZenoAuthUserDoctrineBundle::class => ['all' => true],
+    ZenoAuth\Module\OAuth\Infrastructure\Symfony\Bundle\OAuthDoctrineBundle\ZenoOAuthDoctrineBundle::class => ['all' => true],
 ];

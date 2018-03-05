@@ -36,6 +36,10 @@ interface User extends Model
 
     public function setEmail(Email $email): void;
 
+    public function getName(): string;
+
+    public function setName(string $name): void;
+
     public function getLastLoginAt(): DateTimeInterface;
 
     public function setLastLoginAt(DateTimeInterface $lastLoginAt): void;

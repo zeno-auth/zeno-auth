@@ -38,6 +38,13 @@ new Vue({
 
                     this.$http.post(action, Object.assign(this.user, { _csrf_token: csrf }), { emulateJSON: true }).then(
                         response => {
+                            console.log(response.body);
+                            if (response.body.redirect_uri) {
+                                window.location.href = response.body.redirect_uri;
+
+                                return;
+                            }
+
                             window.location.href = '/';
                         },
                         response => {

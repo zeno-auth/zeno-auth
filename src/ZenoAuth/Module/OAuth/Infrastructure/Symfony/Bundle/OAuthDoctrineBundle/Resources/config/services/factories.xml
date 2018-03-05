@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ This file is part of the zeno-auth package.
+  ~
+  ~ (c) 2018 Borobudur <http://borobudur.io>
+  ~
+  ~ For the full copyright and license information, please view the LICENSE
+  ~ file that was distributed with this source code.
+  -->
+
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <defaults autowire="true" public="false" autoconfigure="true"/>
+
+        <service id="ZenoAuth\Module\OAuth\Domain\Factory\ClientFactoryInterface" class="ZenoAuth\Module\OAuth\Infrastructure\Doctrine\Factory\ClientFactory"/>
+        <service id="ZenoAuth\Module\OAuth\Domain\Factory\AccessTokenFactoryInterface" class="ZenoAuth\Module\OAuth\Infrastructure\Doctrine\Factory\AccessTokenFactory"/>
+        <service id="ZenoAuth\Module\OAuth\Domain\Factory\RefreshTokenFactoryInterface" class="ZenoAuth\Module\OAuth\Infrastructure\Doctrine\Factory\RefreshTokenFactory"/>
+        <service id="ZenoAuth\Module\OAuth\Domain\Factory\AuthorizationCodeFactoryInterface" class="ZenoAuth\Module\OAuth\Infrastructure\Doctrine\Factory\AuthorizationCodeFactory"/>
+        <service id="ZenoAuth\Module\OAuth\Domain\Factory\GrantedClientFactoryInterface" class="ZenoAuth\Module\OAuth\Infrastructure\Doctrine\Factory\GrantedClientFactory"/>
+    </services>
+</container>

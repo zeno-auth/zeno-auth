@@ -20,8 +20,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Core\Exception\InvalidCsrfTokenException;
 use ZenoAuth\Module\User\Domain\Contract\Command\CreateUser;
+use ZenoAuth\Module\User\Domain\Service\UserFinderInterface;
+use ZenoAuth\Web\Infrastructure\Symfony\Security\AuthenticatedUser;
 
 /**
  * @Route(service="ZenoAuth\Web\Infrastructure\Symfony\Http\Controller\AuthController")
@@ -35,16 +39,28 @@ class AuthController extends Controller
      */
     private $bus;
 
-    public function __construct(MessageBusInterface $bus)
+    /**
+     * @var TokenStorageInterface
+     */
+    private $tokenStorage;
+
+    /**
+     * @var UserFinderInterface
+     */
+    private $userFinder;
+
+    public function __construct(MessageBusInterface $bus, TokenStorageInterface $tokenStorage, UserFinderInterface $userFinder)
     {
         $this->bus = $bus;
+        $this->tokenStorage = $tokenStorage;
+        $this->userFinder = $userFinder;
     }
 
     /**
      * @Route("/auth/login", name="zeno_auth_login")
      * @Method("GET")
      */
-    public function loginAction(): Response
+    public function login(): Response
     {
         return $this->render('@ZenoAuthWeb/auth/pages/login.page.html.twig');
     }
@@ -52,7 +68,7 @@ class AuthController extends Controller
     /**
      * @Route("/auth/login", name="zeno_auth_check_login")
      */
-    public function checkLoginAction()
+    public function checkLogin()
     {
         throw new RuntimeException('You must configure the check path to be handled by the firewall using form_login in your security firewall configuration.');
     }
@@ -60,7 +76,7 @@ class AuthController extends Controller
     /**
      * @Route("/auth/logout", name="zeno_auth_logout")
      */
-    public function logoutAction()
+    public function logout()
     {
         throw new RuntimeException('You must activate the logout in your security firewall configuration.');
     }
@@ -82,7 +98,7 @@ class AuthController extends Controller
      *
      * @return JsonResponse
      */
-    public function submitRegisterAction(Request $request): JsonResponse
+    public function submitRegister(Request $request): JsonResponse
     {
         try {
             $content = $request->getContent();
@@ -99,6 +115,13 @@ class AuthController extends Controller
 
             $payload = $message->getMessagePayload()->all();
             $payload = array_merge(['id' => (string) $message->getId()], $payload);
+
+            $user = new AuthenticatedUser($this->userFinder->findOrFail($message->getId()));
+            $token = new UsernamePasswordToken($user, null, 'main', $user->getRoles());
+
+            $this->tokenStorage->setToken($token);
+
+            $request->getSession()->set('_security_main', serialize($token));
 
             return new JsonResponse($payload, 201);
         } catch (\Exception $e) {
