@@ -221,6 +221,9 @@
     "symfony/options-resolver": {
         "version": "4.0-dev"
     },
+    "symfony/polyfill-ctype": {
+        "version": "1.8-dev"
+    },
     "symfony/polyfill-intl-icu": {
         "version": "1.6-dev"
     },
@@ -250,6 +253,9 @@
             "version": "3.3",
             "ref": "5b2f0ee78c90d671860ac6450e37dec10fbc0719"
         }
+    },
+    "symfony/security": {
+        "version": "4.1-dev"
     },
     "symfony/security-bundle": {
         "version": "3.3",
